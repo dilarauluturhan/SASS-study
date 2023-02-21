@@ -1,0 +1,58 @@
+/*Mixin, tanımlanan kod bloğunu istediğimiz yerde çağırmak için...*/
+@mixin grid($cols, $mrg) {
+    float: left;
+    margin-right: $mrg;
+    margin-bottom: $mrg;
+    width: ((100% - (($cols - 1) * $mrg)) / $cols);
+    &:nth-child(#{$cols}n){
+        margin-right: 0;
+    }
+}
+
+/*Responsive Tasarım*/
+/*If Kullanımı*/
+@mixin mediaQuery($args...){
+    @if length($args) == 1{
+        @media screen and (max-width: nth($args,1)){
+            @content;
+        }
+    }
+    @if length($args) ==2{
+        @media screen and (min-width: nth($args,1)) and (max-width: nth($args,2)){
+            @content;
+        }
+    }
+}
+
+@mixin banner {
+    width: 100%;
+    position: relative;
+    color: $headColor;
+    .banner-content {
+        position: absolute;
+        top: 50px;
+        width: 100%;
+    }
+    img {
+        width: 100%;
+    }
+    span {
+        font-size: $bannerHeader;
+        display: block;
+        text-transform: uppercase;
+        text-align: center;
+        font-weight: bold;
+        border: 3px solid;
+        padding: 10px;
+        box-shadow: 20px 20px 10px #42855B;
+    }
+}
+
+/*Float kullanınca arkaplan bozulduğu için...*/
+@mixin clearFloat {
+    &:after { 
+        content: "";
+        display: block;
+        clear: both;
+    }
+}
